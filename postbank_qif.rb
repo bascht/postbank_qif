@@ -24,12 +24,12 @@ raise StandardError, "No Header found" if header != default_header
 puts "!Type:Bank"
 
 for row in reader do
-  date      = ParseDate.parsedate(row[0])
-  date      = sprintf("D%s\/%s\/%s", date[1], date[2], date[0])
+  date      = row[0].split('.')
+  date      = sprintf("D%s\/%s\/%s", date[1], date[0], date[2])
   category  = sprintf("N%s", row[2])
   memo      = sprintf("M%s", row[3])
   payee     = sprintf("P%s", row[5])
-  amount    = sprintf("T%.2f", row[6].gsub(",", "."))
+  amount    = sprintf("T%.2f", row[6].gsub(".", "").gsub(",", "."))
   clearance = 'C*'
 
   puts date, category, amount, memo, payee, amount, clearance, '^'
