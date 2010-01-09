@@ -5,9 +5,9 @@ require 'csv'
 require 'iconv'
 require 'parsedate'
 
-filename = ARGV[0]
+filename = String(ARGV[0])
 
-raise "File %s not found" % ARGV[0] if not File.exist? filename
+raise "File %s not found" % filename if not File.exist? filename
 
 # Convert LATIN1 File to UTF8
 latin_csv = File.open(filename).read 
